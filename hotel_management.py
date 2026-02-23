@@ -135,3 +135,4 @@ class Reservation:
         reservations = FileManager.load_data(cls.FILENAME)
         reservations = [r for r in reservations if r['res_id'] != reservation_id]
         FileManager.save_data(cls.FILENAME, reservations)
+        
