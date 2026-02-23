@@ -47,3 +47,13 @@ class Customer:
         customers = FileManager.load_data(cls.FILENAME)
         customers.append({"id": c_id, "name": name, "email": email})
         FileManager.save_data(cls.FILENAME, customers)
+class Reservation:
+    """Clase para gestionar reservaciones."""
+    FILENAME = "reservations.json"
+
+    @classmethod
+    def create_reservation(cls, res_id, c_id, h_id):
+        """Crea una reservación vinculando cliente y hotel."""
+        reservations = FileManager.load_data(cls.FILENAME)
+        reservations.append({"res_id": res_id, "customer_id": c_id, "hotel_id": h_id})
+        FileManager.save_data(cls.FILENAME, reservations)
