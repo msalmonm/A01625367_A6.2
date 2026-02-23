@@ -11,7 +11,10 @@ class FileManager:
 
     @staticmethod
     def load_data(filename):
-        """Carga datos desde un archivo JSON. Maneja errores de datos (Req 5)."""
+        """
+        Carga datos desde un archivo JSON.
+        Maneja errores de datos (Req 5).
+        """
         if not os.path.exists(filename):
             return []
         try:
@@ -133,6 +136,7 @@ class Reservation:
     def cancel_reservation(cls, reservation_id):
         """Cancela (elimina) una reservación."""
         reservations = FileManager.load_data(cls.FILENAME)
-        reservations = [r for r in reservations if r['res_id'] != reservation_id]
+        reservations = [
+            r for r in reservations if r['res_id'] != reservation_id
+        ]
         FileManager.save_data(cls.FILENAME, reservations)
-        
