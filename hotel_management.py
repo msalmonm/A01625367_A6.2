@@ -20,3 +20,19 @@ class FileManager:
         """Guarda datos en formato JSON."""
         with open(filename, 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4)
+
+class Hotel:
+    """Clase para gestionar hoteles."""
+    FILENAME = "hotels.json"
+
+    def __init__(self, hotel_id, name, location):
+        self.hotel_id = hotel_id
+        self.name = name
+        self.location = location
+
+    @classmethod
+    def create_hotel(cls, h_id, name, loc):
+        """Crea y guarda un hotel."""
+        hotels = FileManager.load_data(cls.FILENAME)
+        hotels.append({"id": h_id, "name": name, "location": loc})
+        FileManager.save_data(cls.FILENAME, hotels)
