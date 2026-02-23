@@ -84,6 +84,27 @@ class TestHotelSystem(unittest.TestCase):
         for f in self.files:
             if os.path.exists(f):
                 os.remove(f)
+    def test_display_hotel_info(self):
+        """Prueba mostrar información de un hotel (Cierra líneas 39-42)."""
+        Hotel.create_hotel(1, "Hotel Test", "Lugar", 10)
+        info = Hotel.display_hotel_info(1)
+        self.assertEqual(info['name'], "Hotel Test")
+        # Caso negativo: hotel inexistente
+        info_none = Hotel.display_hotel_info(999)
+        self.assertIsNone(info_none)
 
+    def test_modify_hotel_info(self):
+        """Prueba modificar información de un hotel (Cierra líneas 45-50)."""
+        Hotel.create_hotel(1, "Original", "Lugar", 10)
+        Hotel.modify_hotel_info(1, name="Modificado", rooms=25)
+        hotels = FileManager.load_data("hotels.json")
+        self.assertEqual(hotels[0]['name'], "Modificado")
+        self.assertEqual(hotels[0]['rooms'], 25)
+
+    def test_display_customer_info(self):
+        """Prueba mostrar información de un cliente (Cierra líneas 110-114)."""
+        Customer.create_customer(1, "User", "user@test.com")
+        info = Customer.display_customer_info(1)
+        self.assertEqual(info['name'], "User")
 if __name__ == "__main__":
     unittest.main()
